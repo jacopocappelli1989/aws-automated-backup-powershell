@@ -85,29 +85,6 @@ Enter your log path:
 $LOG_PATH="C:\AWS\Logs\"
 ```
 
-Provide a from address (must be verified in Amazon Simple Email Services (SES) if using it) & an admin address that will receive emails. Optionally add a prefix to your subject for better sorting/routing of email:
-
-```PowerShell
-#Email
-$FROM_ADDRESS =     "nnn@nnn.com"
-$ADMIN_ADDRESSES =  "nnn@nnn.com" #Add multiple addresses as such: "user1@nnn.com", "user2@nnn.com"
-$SUBJECT_PREFIX = "" #Leave blank if you do not want any prefix
-```
-
-If using a custom email server set the following variables. The password is stored in an ecrypted form (see [here](http://social.technet.microsoft.com/wiki/contents/articles/4546.working-with-passwords-secure-strings-and-credentials-in-windows-powershell.aspx)):
-
-```PowerShell
-$CUSTOM_EMAIL = $true # Set to $true to enable custom email
-
-
-#Custom Email Properties
-$CUSTOM_EMAIL_USERNAME = "xxxxxx" #Can be "domain\username" or "user@domain.com". This will depend of your email system.
-$CUSTOM_EMAIL_SECURE_PASSWORD = "*************" #Run "read-host -AsSecureString | ConvertFrom-SecureString" and paste the output above within quotes and no line breaks
-$CUSTOM_EMAIL_SERVER = "mail.nnn.com"
-$CUSTOM_EMAIL_PORT  = 25
-$CUSTOM_EMAIL_SSL = $true
-```
-
 Edit the max number of days to keep old snapshots and the max allowable runtime of the script:
 
 ```PowerShell
@@ -140,11 +117,12 @@ Verify the paths to AWSConfig.ps1 and AWSUtilities.ps1 :
 Edit the environment variables to define the Name (i.e. "Our Cloud Servers"), Type (i.e. "Staging", "Production", etc.), the Backup Type (i.e. "Daily") and, most importantly, the Tag to look for to identify instances to backup:
 
 ```PowerShell
-# Environment
-$ENVIRONMENT_NAME = "Our Cloud Servers"
-$ENVIRONMENT_TYPE = "Production"
+#Environment
+$ENVIRONMENT_NAME = "My Environment"
+$ENVIRONMENT_TYPE = "Development"
 $BACKUP_TYPE = "Daily"
-$backupTag = "xxxxxxxx" #Make sure the value of this tag is 'Yes', without the quotes, on the instances you want backed up
+$backupTag = "Yes" #Make sure the value of this Tag is 'Yes', without the quotes, on the instances you want backed up
+$stagingInstanceIDs="i-XXXXXXXX"
 ```
 ## Usage
 
